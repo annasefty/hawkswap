@@ -1,0 +1,124 @@
+/* Global styles */
+body {
+    font-family: 'Georgia', Times, serif, sans-serif;
+    margin: 20px;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    font-family: 'Bebas Neue', Times, serif, sans-serif;
+    background-color: #5e2f00;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin: 0px;
+    font-size: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    margin-top: 10px;  /* Space between header and nav */
+    text-align: center;  /* Center align the nav items */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+  }
+  
+  .searchTerm {
+    width: 100%;
+    border: 3px solid #5e2f00;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+  }
+  
+  .searchTerm:focus{
+    color: #5e2f00;
+  }
+  
+  .searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #5e2f00;
+    background: #5e2f00;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  /*Resize the wrap to see the search bar change!*/
+  /* Updated .wrap to adjust position */
+.wrap {
+    width: 30%;
+    position: relative; /* Change from absolute to relative */
+    margin: 20px auto; /* Center the search bar horizontally */
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.photo-grid a:hover {
+    opacity: 0.8; /* Optional: Add hover effect */
+}
+
+
+.photo-grid div {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 0;
+}
+
+.photo-grid img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Ensures images are square */
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+.photo-grid p {
+    margin: 10px 0 0;
+    font-size: 16px;
+    color: #333;
+    padding: 10px;
+}
