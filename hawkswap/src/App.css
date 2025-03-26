@@ -6,42 +6,71 @@ body {
   background-color: #f4f4f4;
 }
 
-header {
-  font-family: 'Bebas Neue', Times, serif, sans-serif;
-  background-color: #5e2f00;
+.header {
+  background-color: #4a2500;
   color: white;
-  padding: 10px;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack vertically */
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: 60px;
+  font-weight: bold;
+  margin: 0;
   text-align: center;
-  margin: 0px;
-  font-size: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-nav {
-  margin-top: 10px;  /* Space between header and nav */
-  text-align: center;  /* Center align the nav items */
+.logo-img {
+  height: 70px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  margin-top: 5px;
 }
 
-nav ul {
+
+
+
+
+
+/* NAVIGATION */
+.nav ul {
   list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
   padding: 0;
 }
 
-nav ul li {
-  display: inline;
-  margin-right: 20px;
-}
-
-nav ul li a {
+.nav ul li a {
   color: white;
-  text-decoration: none;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
+  text-decoration: none;
 }
 
-nav ul li a:hover {
+.nav ul li a:hover {
   text-decoration: underline;
+}
+
+
+
+.wrap {
+  width: 100%;
+  max-width: 700px;
+  margin: 40px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .search {
@@ -50,38 +79,33 @@ nav ul li a:hover {
   display: flex;
 }
 
+
 .searchTerm {
   width: 100%;
-  border: 3px solid #5e2f00;
+  border: 3px solid #4a2500;
   border-right: none;
-  padding: 5px;
-  height: 20px;
-  border-radius: 5px 0 0 5px;
+  padding: 16px 24px;
+  height: 50px;
+  border-radius: 10px 0 0 10px;
   outline: none;
-  color: #9DBFAF;
-}
-
-.searchTerm:focus {
-  color: #5e2f00;
+  color: #333;
+  font-size: 18px;
 }
 
 .searchButton {
-  width: 40px;
-  height: 36px;
-  border: 1px solid #5e2f00;
-  background: #5e2f00;
-  text-align: center;
-  color: #fff;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border: none;
+  background: #4a2500;
+  color: white;
+  border-radius: 0 10px 10px 0;
   font-size: 20px;
+  cursor: pointer;
 }
 
-/* Resize the wrap to see the search bar change! */
-.wrap {
-  width: 30%;
-  position: relative;
-  margin: 20px auto; /* Center the search bar horizontally */
+
+.searchButton:hover {
+  background: #4a2500;
 }
 
 .photo-grid {
