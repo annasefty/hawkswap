@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import PhotoGrid from './components/PhotoGrid';
 import About from './components/About';
+import ListItem from './components/ListItem';
 import TextField from '@mui/material/TextField';
 import './App.css';
 
@@ -38,6 +39,7 @@ const App = () => {
             }
           />
           <Route path="/about" element={<About />} />
+          <Route path="/listitem" element={<ListItem />} /> {/* Use element instead of component */}
         </Routes>
       </div>
     </Router>
