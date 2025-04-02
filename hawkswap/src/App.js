@@ -18,29 +18,31 @@ const App = () => {
     <Router>
       <div className="App">
         <Header />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <div className="wrap">
-                  <div className="search">
-                    <TextField
-                      id="outlined-basic"
-                      variant="outlined"
-                      fullWidth
-                      label="Search"
-                      onChange={inputHandler}
-                    />
+        <div className="main-content">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <div className="wrap">
+                    <div className="search">
+                      <TextField
+                        id="outlined-basic"
+                        variant="outlined"
+                        fullWidth
+                        label="Search"
+                        onChange={inputHandler}
+                      />
+                    </div>
                   </div>
-                </div>
-                <PhotoGrid filter={inputText} />
-              </>
-            }
-          />
-          <Route path="/about" element={<About />} />
-          <Route path="/listitem" element={<ListItem />} /> {/* Use element instead of component */}
-        </Routes>
+                  <PhotoGrid filter={inputText} />
+                </>
+              }
+            />
+            <Route path="/about" element={<About />} />
+            <Route path="/listitem" element={<ListItem />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );

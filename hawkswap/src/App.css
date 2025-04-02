@@ -1,46 +1,56 @@
 /* Global styles */
 body {
   font-family: 'Georgia', Times, serif, sans-serif;
-  margin: 20px;
+  margin: 0;
   padding: 0;
   background-color: #f4f4f4;
 }
-
 .header {
-  background-color: #4a2500;
+  background-color: #4a2500; /* Match the brown background color */
   color: white;
-  padding: 2rem;
-  border-radius: 10px;
-}
-
-.header-content {
+  height: 120px; /* Set the height of the header */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; /* Stack vertically */
-  gap: 1.5rem;
+  align-items: center; /* Center content vertically */
+  justify-content: space-between; /* Space out left, center, and right sections */
+  padding: 0 1rem; /* Add padding to the sides */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.title {
-  font-size: 60px;
-  font-weight: bold;
-  margin: 0;
-  text-align: center;
+.header-left {
+  display: flex;
+  align-items: center;
 }
 
 .logo-img {
-  height: 70px;
+  height: 80px; /* Adjust the height to make the Hawk Swap logo bigger */
   width: auto;
-  display: block;
   object-fit: contain;
-  margin-top: 5px;
 }
 
-/* NAVIGATION */
+.header-title {
+  font-size: 28px; /* Adjust font size for the title */
+  font-weight: bold;
+  text-align: center;
+  position: absolute; /* Position the title absolutely */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Add spacing between navigation and Google button */
+}
+
 .nav ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 20px; /* Add spacing between navigation links */
   margin: 0;
   padding: 0;
 }
@@ -56,6 +66,35 @@ body {
   text-decoration: underline;
 }
 
+.google-signin-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between the Google logo and text */
+  font-size: 16px;
+  color: white;
+}
+
+.google-logo {
+  height: 30px;
+  width: auto;
+  object-fit: contain;
+}
+
+.google-profile-pic {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+/* Add padding to the main content to prevent it from being cut off by the header */
+.main-content {
+  padding-top: 120px; /* Match the height of the header */
+}
 
 
 .wrap {
