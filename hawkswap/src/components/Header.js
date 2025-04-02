@@ -1,20 +1,30 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth, provider } from "../firebase"; // Import Firebase auth and provider
-import { signInWithPopup } from "firebase/auth"; // Import the sign-in method
+import { signInWithPopup, signOut } from "firebase/auth"; // Import sign-in and sign-out methods
 import "../App.css";
 
 const Header = () => {
   const [user, setUser] = useState(null); // State to store the signed-in user's information
+  const navigate = useNavigate(); // Hook to navigate between pages
 
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithPopup(auth, provider); // Trigger Google sign-in popup
       const user = result.user; // Get the signed-in user's information
-      setUser(user); // Store the user info in state
-      console.log("User signed in:", user); // Log user info for debugging
+
+      // Verify the email domain
+      if (user.email.endsWith("@lehigh.edu")) {
+        setUser(user); // Store the user info in state
+      } else {
+        // If the email is not from @lehigh.edu, sign out the user and navigate to the error page
+        await signOut(auth);
+        setUser(null);
+        navigate("/error"); // Redirect to the error page
+      }
     } catch (error) {
       console.error("Error signing in with Google:", error); // Handle errors
+      navigate("/error"); // Redirect to the error page on error
     }
   };
 
