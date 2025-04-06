@@ -32,27 +32,21 @@ const ListItem = () => {
 
   const handleImageUpload = async () => {
     if (!itemImage) {
-      console.error('No image selected');
       setError('Please select an image to upload.');
       return null;
     }
 
     try {
-      // Create a reference to the user's storage path
-      const storageRef = ref(storage, `users/${user.uid}/${Date.now()}_${itemImage.name}`);
-      console.log('Uploading to storage path:', storageRef.fullPath);
-
-      // Upload the image
+      const timestamp = Date.now();
+      const filePath = `users/${user.uid}/${timestamp}_${itemImage.name}`;
+      const storageRef = ref(storage, filePath);
+      
       const snapshot = await uploadBytes(storageRef, itemImage);
-      console.log('Image uploaded successfully');
-
-      // Get the download URL
       const downloadURL = await getDownloadURL(snapshot.ref);
-      console.log('Image URL:', downloadURL);
       return downloadURL;
     } catch (error) {
-      console.error('Error uploading image:', error);
-      setError('Failed to upload image: ' + error.message);
+      console.error('Upload error:', error);
+      setError('Failed to upload image. Please try again.');
       return null;
     }
   };

@@ -1,6 +1,7 @@
 {
   "projects": {
-    "staging": "hawkswap-802c6"
+    "staging": "hawkswap-802c6",
+    "default": "hawkswap-802c6"
   },
   "targets": {},
   "etags": {}
