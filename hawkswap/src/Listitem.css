@@ -1,61 +1,73 @@
-/* filepath: /Users/annaseftenberg/Desktop/hawkswap_marketplace/hawkswap/hawkswap/src/Listitem.css */
-.list-item-container {
-  max-width: 600px;
-  margin: 20px auto; /* Add margin-top to create space between the header and the container */
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
-  font-family: 'Bebas Neue', sans-serif; /* Apply Bebas Neue font */
+body {
+  font-family: 'Bebas Neue', sans-serif;
 }
 
-.list-item-container h1 {
+.list-item-form h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+}
+
+.list-item-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.list-item-form h1 {
   text-align: center;
   margin-bottom: 20px;
-  font-family: 'Bebas Neue', sans-serif; /* Apply Bebas Neue font */
 }
 
-.list-item-container form {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center the form elements horizontally */
-  padding: 20px; /* Add padding to the form */
-}
-
-.list-item-container form div {
-  width: 100%; /* Ensure the div takes full width */
+.form-group {
   margin-bottom: 15px;
 }
 
-.list-item-container form label {
-  margin-bottom: 5px;
+.form-group label {
+  display: block;
   font-weight: bold;
-  font-family: 'Bebas Neue', sans-serif; /* Apply Bebas Neue font */
+  margin-bottom: 5px;
 }
 
-.list-item-container form input,
-.list-item-container form textarea,
-.list-item-container form select {
-width: 100%; /* Ensure the input, textarea, and select take full width */
-padding: 10px;
-border: 1px solid #ccc;
-border-radius: 4px;
-font-family: 'Bebas Neue', sans-serif; /* Apply Bebas Neue font */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.list-item-container form button {
-  padding: 10px 15px;
+.form-group textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+button[type='submit'] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4a2500;
+  color: white;
   border: none;
   border-radius: 4px;
-  background-color: #4a2500;
-  color: #fff;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 15px; /* Add margin-top to separate the button from the input fields */
-  font-family: 'Bebas Neue', sans-serif; /* Apply Bebas Neue font */
 }
 
-.list-item-container form button:hover {
-  background-color: #0056b3;
+button[type='submit']:hover {
+  background-color: #3a1e00;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.success-message {
+  color: green;
+  text-align: center;
+  margin-bottom: 15px;
 }

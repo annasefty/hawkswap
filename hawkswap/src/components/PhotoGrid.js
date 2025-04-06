@@ -1,35 +1,80 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { auth } from '../firebase';
+import '../App.css';
 
-const PhotoGrid = ({ filter }) => {
-  const items = [
-    { imgSrc: 'images.jpg', alt: 'Photo 1', label: 'Devpulse' },
-    { imgSrc: 'photo2.jpg', alt: 'Photo 2', label: 'Linklinks' },
-    { imgSrc: 'photo3.jpg', alt: 'Photo 3', label: 'Centizu' },
-    { imgSrc: 'photo4.jpg', alt: 'Photo 4', label: 'Dynabox' },
-    { imgSrc: 'photo5.jpg', alt: 'Photo 5', label: 'Avaveo' },
-    { imgSrc: 'photo6.jpg', alt: 'Photo 6', label: 'Demivee' },
-    { imgSrc: 'photo7.jpg', alt: 'Photo 7', label: 'Jayo' },
-    { imgSrc: 'photo8.jpg', alt: 'Photo 8', label: 'Blognation' },
-    { imgSrc: 'photo9.jpg', alt: 'Photo 9', label: 'Layo' },
-  ];
+const PhotoGrid = () => {
+  const [items, setItems] = useState([]);
+  const [error, setError] = useState(null);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const navigate = useNavigate();
+  const db = getFirestore();
 
-  const filteredItems = items.filter((item) =>
-    item.label.toLowerCase().includes(filter)
-  );
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'items'));
+        const itemsData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setItems(itemsData);
+      } catch (err) {
+        console.error('Error fetching items:', err);
+        setError('Failed to fetch items. Please check your permissions.');
+      }
+    };
+  
+    fetchItems();
+  }, [db]);
+
+  const handleListingClick = (id) => {
+    if (!auth.currentUser) {
+      setShowLoginPopup(true);
+      setTimeout(() => {
+        setShowLoginPopup(false);
+      }, 3000);
+      return;
+    }
+    navigate(`/listing/${id}`);
+  };
+
+  if (error) {
+    return <p className="error-message">{error}</p>;
+  }
 
   return (
-    <div className="photo-grid">
-      {filteredItems.length > 0 ? (
-        filteredItems.map((item, index) => (
-          <div key={index}>
-            <img src={item.imgSrc} alt={item.alt} />
-            <p>{item.label}</p>
-          </div>
-        ))
-      ) : (
-        <p style={{ textAlign: 'center', fontSize: '18px' }}>No results found.</p>
+    <>
+      {showLoginPopup && (
+        <div className="login-popup">
+          <p>Please sign in to view listing details</p>
+        </div>
       )}
-    </div>
+      <div className="photo-grid">
+        {items.map((item) => (
+          <div 
+            key={item.id} 
+            className={`photo-grid-item ${!auth.currentUser ? 'not-logged-in' : ''}`}
+            onClick={() => handleListingClick(item.id)}
+          >
+            <div className="image-container">
+              {item.imageUrl && (
+                <img src={item.imageUrl} alt={item.name} className="photo-grid-image" />
+              )}
+              {!auth.currentUser && (
+                <div className="login-overlay">
+                  <span>Sign in to view details</span>
+                </div>
+              )}
+            </div>
+            <h3>{item.name}</h3>
+            <p>{item.description}</p>
+            <p><strong>Category:</strong> {item.category}</p>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

@@ -1,12 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, provider } from "../firebase"; // Import Firebase auth and provider
-import { signInWithPopup, signOut } from "firebase/auth"; // Import sign-in and sign-out methods
+import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth"; // Import sign-in and sign-out methods
 import "../App.css";
 
 const Header = () => {
   const [user, setUser] = useState(null); // State to store the signed-in user's information
   const navigate = useNavigate(); // Hook to navigate between pages
+
+  useEffect(() => {
+    // Listen for auth state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser && currentUser.email.endsWith("@lehigh.edu")) {
+        setUser(currentUser);
+      } else {
+        setUser(null);
+      }
+    });
+
+    // Cleanup subscription
+    return () => unsubscribe();
+  }, []);
 
   const handleGoogleSignIn = async () => {
     try {
@@ -28,6 +42,10 @@ const Header = () => {
     }
   };
 
+  const handleProfileClick = () => {
+    navigate('/profile');
+  };
+
   return (
     <header className="header">
       <div className="header-left">
@@ -43,20 +61,24 @@ const Header = () => {
             <li><Link to="/listitem">List an Item</Link></li>
           </ul>
         </nav>
-        <button className="google-signin-button" onClick={handleGoogleSignIn}>
-          {user ? (
+        {user ? (
+          <div 
+            className="profile-button"
+            onClick={handleProfileClick}
+            title="View Profile"
+          >
             <img
-              src={user.photoURL} // Use the user's Google profile picture
-              alt={user.displayName} // Use the user's display name as alt text
+              src={user.photoURL}
+              alt={user.displayName}
               className="google-profile-pic"
             />
-          ) : (
-            <>
-              <img src="/images/google-logo.png" alt="Google Logo" className="google-logo" />
-              Sign in with Google
-            </>
-          )}
-        </button>
+          </div>
+        ) : (
+          <button className="google-signin-button" onClick={handleGoogleSignIn}>
+            <img src="/images/google-logo.png" alt="Google Logo" className="google-logo" />
+            Sign in with Google
+          </button>
+        )}
       </div>
     </header>
   );

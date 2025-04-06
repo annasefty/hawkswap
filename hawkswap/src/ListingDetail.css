@@ -1,0 +1,120 @@
+.listing-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 140px; /* Account for the fixed header */
+}
+
+.back-button {
+  background-color: #4a2500;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #3a1e00;
+}
+
+.listing-detail-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.listing-image-container {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.listing-detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.listing-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.listing-info h1 {
+  color: #4a2500;
+  margin: 0;
+  font-size: 32px;
+}
+
+.description {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  margin: 15px 0;
+}
+
+.category, .status {
+  font-size: 16px;
+  color: #666;
+}
+
+.seller-info {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.seller-info h2 {
+  color: #4a2500;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.seller-email {
+  font-size: 18px;
+  color: #333;
+}
+
+.listing-date {
+  color: #666;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.error {
+  text-align: center;
+  color: #f44336;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .listing-detail-content {
+    grid-template-columns: 1fr;
+  }
+
+  .listing-image-container {
+    aspect-ratio: 16/9;
+  }
+
+  .listing-info h1 {
+    font-size: 24px;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+} 
