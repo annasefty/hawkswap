@@ -31,3 +31,42 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
+
+  .faq-section {
+    /* font-family: 'Georgia', Times, serif, sans-serif; */
+    font-family: 'Bebas Neue', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    margin: 20px auto 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+  }
+  
+  .faq-shell-box {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .faq-shell-box h2 {
+    font-size: 28px; /* Make the header larger */
+    margin-bottom: 16px;
+  }
+  
+  .faq-shell-box li {
+    font-size: 18px; /* Increase font size for questions/answers */
+    margin-bottom: 12px;
+    line-height: 1.5;
+  }
+  
+  
+  .faq-shell-box ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
