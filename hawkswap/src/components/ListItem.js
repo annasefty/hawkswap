@@ -38,11 +38,37 @@ const ListItem = () => {
     }
 
     try {
+      // Check if image is HEIC format
+      if (itemImage.name.toLowerCase().endsWith('.heic')) {
+        setError('HEIC images are not supported. Please convert to JPEG/PNG before uploading.');
+        return null;
+      }
+
       const timestamp = Date.now();
+      const extension = itemImage.name.split('.').pop().toLowerCase();
+      
+      // Only allow certain image formats
+      const allowedFormats = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+      if (!allowedFormats.includes(extension)) {
+        setError('Please upload an image in JPG, PNG, GIF, or WebP format.');
+        return null;
+      }
+
       const filePath = `users/${user.uid}/${timestamp}_${itemImage.name}`;
       const storageRef = ref(storage, filePath);
       
-      const snapshot = await uploadBytes(storageRef, itemImage);
+      // Add metadata
+      const metadata = {
+        contentType: `image/${extension === 'jpg' ? 'jpeg' : extension}`,
+        customMetadata: {
+          uploadedBy: user.email,
+          uploadTime: new Date().toISOString()
+        }
+      };
+
+      const snapshot = await uploadBytes(storageRef, itemImage, metadata);
+      console.log('Image uploaded successfully:', snapshot.ref.fullPath);
+      
       const downloadURL = await getDownloadURL(snapshot.ref);
       return downloadURL;
     } catch (error) {

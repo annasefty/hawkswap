@@ -100,27 +100,65 @@ const Profile = () => {
   const handleEdit = (listing) => {
     setEditingListing({
       ...listing,
+      price: listing.price ? listing.price.toFixed(2) : '0.00',
       isEditing: true
+    });
+  };
+
+  const handlePriceChange = (e) => {
+    let value = e.target.value;
+    
+    // Remove any non-digit characters except decimal point
+    value = value.replace(/[^\d.]/g, '');
+    
+    // Ensure only one decimal point
+    const parts = value.split('.');
+    if (parts.length > 2) {
+      value = parts[0] + '.' + parts.slice(1).join('');
+    }
+    
+    // Limit to two decimal places
+    if (parts.length === 2 && parts[1].length > 2) {
+      value = parts[0] + '.' + parts[1].slice(0, 2);
+    }
+
+    setEditingListing({
+      ...editingListing,
+      price: value
     });
   };
 
   const handleUpdate = async () => {
     try {
+      // Validate price before updating
+      const priceValue = parseFloat(editingListing.price) || 0;
+      if (priceValue < 0) {
+        setError('Price cannot be negative');
+        return;
+      }
+
       const docRef = doc(db, 'items', editingListing.id);
       await updateDoc(docRef, {
         name: editingListing.name,
         description: editingListing.description,
-        category: editingListing.category
+        category: editingListing.category,
+        price: priceValue
       });
+
+      // Update local state with properly formatted price
+      const updatedListing = {
+        ...editingListing,
+        price: priceValue
+      };
 
       setUserListings(prevListings =>
         prevListings.map(item =>
-          item.id === editingListing.id ? editingListing : item
+          item.id === editingListing.id ? updatedListing : item
         )
       );
 
       setEditingListing(null);
-      setError(''); // Clear any previous errors
+      setError('');
     } catch (err) {
       console.error('Error updating listing:', err);
       setError('Failed to update listing: ' + err.message);
@@ -172,6 +210,7 @@ const Profile = () => {
                       ...editingListing,
                       name: e.target.value
                     })}
+                    placeholder="Item Name"
                   />
                   <textarea
                     value={editingListing.description}
@@ -179,7 +218,18 @@ const Profile = () => {
                       ...editingListing,
                       description: e.target.value
                     })}
+                    placeholder="Description"
                   />
+                  <div className="price-input-container">
+                    <span className="dollar-sign">$</span>
+                    <input
+                      type="text"
+                      value={editingListing.price}
+                      onChange={handlePriceChange}
+                      placeholder="0.00"
+                      className="price-input"
+                    />
+                  </div>
                   <select
                     value={editingListing.category}
                     onChange={(e) => setEditingListing({
@@ -202,6 +252,7 @@ const Profile = () => {
                 <>
                   <img src={listing.imageUrl} alt={listing.name} />
                   <h3>{listing.name}</h3>
+                  <p className="price">${listing.price ? listing.price.toFixed(2) : '0.00'}</p>
                   <p>{listing.description}</p>
                   <p className="category">Category: {listing.category}</p>
                   <p className="status">Status: {listing.status}</p>

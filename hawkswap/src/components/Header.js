@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, provider } from "../firebase"; // Import Firebase auth and provider
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth"; // Import sign-in and sign-out methods
 import "../App.css";
 
-const Header = () => {
-  const [user, setUser] = useState(null); // State to store the signed-in user's information
+const Header = ({ user, setUser }) => {
   const navigate = useNavigate(); // Hook to navigate between pages
 
-  useEffect(() => {
+  React.useEffect(() => {
     // Listen for auth state changes
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.email.endsWith("@lehigh.edu")) {
         setUser(currentUser);
+      } else if (currentUser) {
+        // If user is signed in but not with Lehigh email
+        signOut(auth).then(() => {
+          setUser(null);
+          navigate("/error");
+        });
       } else {
         setUser(null);
       }
@@ -20,7 +25,7 @@ const Header = () => {
 
     // Cleanup subscription
     return () => unsubscribe();
-  }, []);
+  }, [setUser, navigate]); // Added missing dependencies
 
   const handleGoogleSignIn = async () => {
     try {
@@ -58,7 +63,8 @@ const Header = () => {
         <nav className="nav">
           <ul>
             <li><Link to="/about">About</Link></li>
-            <li><Link to="/listitem">List an Item</Link></li>
+            {user && <li><Link to="/listitem">List an Item</Link></li>}
+            {/* {user && <li><Link to="/saved">Saved Items</Link></li>} */}
           </ul>
         </nav>
         {user ? (

@@ -85,6 +85,9 @@
 
 .editing-form {
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .editing-form input,
@@ -95,11 +98,29 @@
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  font-size: 14px;
+}
+
+.editing-form input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.editing-form input[type="number"]::-webkit-outer-spin-button,
+.editing-form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .editing-form textarea {
   min-height: 100px;
   resize: vertical;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4a2500;
+  margin: 8px 0;
 }
 
 .edit-buttons {
@@ -196,4 +217,33 @@
 
 .logout-button:hover {
   background-color: #3a1e00;
+}
+
+.price-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.dollar-sign {
+  position: absolute;
+  left: 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.price-input {
+  padding-left: 25px !important;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.price-input:focus {
+  outline: none;
+  border-color: #4a2500;
+  box-shadow: 0 0 0 2px rgba(74, 37, 0, 0.1);
 } 

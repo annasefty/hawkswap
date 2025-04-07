@@ -60,6 +60,13 @@
   font-size: 32px;
 }
 
+.price {
+  font-size: 28px;
+  font-weight: bold;
+  color: #4a2500;
+  margin: 10px 0;
+}
+
 .description {
   font-size: 18px;
   line-height: 1.6;
@@ -98,6 +105,54 @@
 .error {
   text-align: center;
   color: #f44336;
+}
+
+.listing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.listing-header h1 {
+  margin: 0;
+}
+
+.error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.save-button {
+  background-color: #ffffff;
+  border: 2px solid #007bff;
+  color: #007bff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  margin-left: 15px;
+}
+
+.save-button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.save-button.saved {
+  background-color: #007bff;
+  color: white;
+}
+
+.save-button.saved:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
 }
 
 /* Responsive Design */
