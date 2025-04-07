@@ -1,72 +1,71 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import '../App.css';
+import React, { useState, useEffect } from 'react';
+import { db } from '../firebase';
+import { collection, getDocs } from 'firebase/firestore';
+import { Link } from 'react-router-dom'; // ✅ Add this line
 
 const PhotoGrid = ({ user, filter, categoryFilter }) => {
-  const [items, setItems] = useState([]);
-  const navigate = useNavigate();
-  const db = getFirestore();
+  const [listings, setListings] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchItems = async () => {
-      if (!user) return;
+    const fetchListings = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, 'items'));
-        const itemsData = querySnapshot.docs.map(doc => ({
+        const fetchedListings = querySnapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         }));
-        setItems(itemsData);
-      } catch (err) {
-        console.error('Error fetching items:', err);
+        setListings(fetchedListings);
+      } catch (error) {
+        console.error('Error fetching listings:', error);
+      } finally {
+        setLoading(false);
       }
     };
-  
-    fetchItems();
-  }, [db, user]);
 
-  const handleListingClick = (id) => {
-    navigate(`/listing/${id}`);
-  };
+    fetchListings();
+  }, []);
 
-  // Filter items based on search input and category
-  const filteredItems = items.filter(item => {
-    const matchesSearch = !filter || 
-      item.name?.toLowerCase().includes(filter.toLowerCase()) ||
-      item.description?.toLowerCase().includes(filter.toLowerCase());
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    const matchesCategory = !categoryFilter || categoryFilter === 'All' || 
-      item.category === categoryFilter;
+  if (!user) {
+    return <div className="no-results">Please log in to view listings.</div>;
+  }
 
-    return matchesSearch && matchesCategory;
-  });
+  if (listings.length === 0) {
+    return <div className="no-results">No listings available.</div>;
+  }
 
   return (
     <div className="photo-grid">
-      {filteredItems.length === 0 ? (
-        <div className="no-results">
-          <p>Please log in to view listings.</p>
-        </div>
-      ) : (
-        filteredItems.map((item) => (
-          <div 
-            key={item.id} 
+      {listings
+        .filter((listing) => {
+          const matchesFilter = listing.name.toLowerCase().includes(filter);
+          const matchesCategory =
+            categoryFilter === 'All' || listing.category === categoryFilter;
+          return matchesFilter && matchesCategory;
+        })
+        .map((listing) => (
+          <Link
+            to={`/listing/${listing.id}`}
+            key={listing.id}
             className="photo-grid-item"
-            onClick={() => handleListingClick(item.id)}
+            style={{ textDecoration: 'none', color: 'inherit' }} // ✅ preserves style
           >
             <div className="image-container">
-              {item.imageUrl && (
-                <img src={item.imageUrl} alt={item.name} className="photo-grid-image" />
-              )}
+              <img
+                src={listing.imageUrl}
+                alt={listing.name}
+                className="photo-grid-image"
+              />
             </div>
-            <h3>{item.name}</h3>
-            <p className="item-price">${item.price ? item.price.toFixed(2) : '0.00'}</p>
-            <p className="item-description">{item.description}</p>
-            <p className="item-category"><strong>Category:</strong> {item.category}</p>
-          </div>
-        ))
-      )}
+            <h3>{listing.name}</h3>
+            <p className="item-price">${listing.price.toFixed(2)}</p>
+            <p className="item-category">{listing.category}</p>
+          </Link>
+        ))}
     </div>
   );
 };

@@ -2,7 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  padding-top: 140px; /* Account for the fixed header */
+  padding-top: 0; /* ✅ Removed default padding */
 }
 
 .back-button {
@@ -74,7 +74,8 @@
   margin: 15px 0;
 }
 
-.category, .status {
+.category,
+.status {
   font-size: 16px;
   color: #666;
 }
@@ -114,10 +115,6 @@
   margin-bottom: 15px;
 }
 
-.listing-header h1 {
-  margin: 0;
-}
-
 .error-message {
   color: #dc3545;
   background-color: #f8d7da;
@@ -128,48 +125,35 @@
   text-align: center;
 }
 
-.save-button {
-  background-color: #ffffff;
-  border: 2px solid #007bff;
-  color: #007bff;
-  padding: 8px 16px;
-  border-radius: 4px;
+.gmail-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: none;
   cursor: pointer;
-  font-size: 16px;
-  transition: all 0.2s ease;
-  margin-left: 15px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+  font-size: 14px;
+  color: #333;
+  margin-top: 5px;
 }
 
-.save-button:hover {
-  background-color: #007bff;
-  color: white;
+.gmail-button:hover {
+  transform: scale(1.05);
 }
 
-.save-button.saved {
-  background-color: #007bff;
-  color: white;
+.gmail-icon {
+  width: 32px;
+  height: 32px;
 }
 
-.save-button.saved:hover {
-  background-color: #0056b3;
-  border-color: #0056b3;
+
+.seller-header {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Was 10px */
+  margin-bottom: 10px;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .listing-detail-content {
-    grid-template-columns: 1fr;
-  }
 
-  .listing-image-container {
-    aspect-ratio: 16/9;
-  }
-
-  .listing-info h1 {
-    font-size: 24px;
-  }
-
-  .description {
-    font-size: 16px;
-  }
-} 

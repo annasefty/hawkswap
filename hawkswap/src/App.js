@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
+
 import Header from './components/Header';
 import PhotoGrid from './components/PhotoGrid';
 import About from './components/About';
@@ -10,11 +11,13 @@ import ErrorPage from './components/ErrorPage';
 import Profile from './components/Profile';
 import ListingDetail from './components/ListingDetail';
 // import SavedListings from './components/SavedListings';
+
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+
 import './App.css';
 
 const App = () => {
@@ -41,36 +44,39 @@ const App = () => {
 
   return (
     <Router>
-      <AppContent 
-        inputText={inputText} 
+      <AppContent
+        inputText={inputText}
         inputHandler={inputHandler}
         categoryFilter={categoryFilter}
         categoryHandler={categoryHandler}
-        user={user} 
-        loading={loading} 
-        setUser={setUser} 
+        user={user}
+        setUser={setUser}
+        loading={loading}
       />
     </Router>
   );
 };
 
-const AppContent = ({ 
-  inputText, 
-  inputHandler, 
+const AppContent = ({
+  inputText,
+  inputHandler,
   categoryFilter,
   categoryHandler,
-  user, 
-  setUser, 
-  loading 
+  user,
+  setUser,
+  loading
 }) => {
   const location = useLocation();
 
   if (loading) return <div>Loading...</div>;
 
+  // Remove padding under header on /listing/:id only
+  const isListingDetailPage = /^\/listing\/[^/]+$/.test(location.pathname);
+
   return (
     <div className="App">
       {location.pathname !== '/error' && <Header user={user} setUser={setUser} />}
-      <div className="main-content">
+      <div className={`main-content ${!isListingDetailPage ? 'padding-under-header' : ''}`}>
         <Routes>
           <Route
             path="/"
@@ -111,7 +117,7 @@ const AppContent = ({
           />
           <Route path="/about" element={<About />} />
           <Route path="/listitem" element={<ListItem user={user} />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile user={user} />} />
           {/* <Route path="/saved" element={<SavedListings />} /> */}
           <Route path="/listing/:id" element={<ListingDetail />} />
           <Route path="/error" element={<ErrorPage />} />

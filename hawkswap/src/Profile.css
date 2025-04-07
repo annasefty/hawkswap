@@ -8,6 +8,8 @@
   text-align: center;
   margin-bottom: 30px;
   color: #333;
+  font-size: 26px;
+  letter-spacing: 1px;
 }
 
 .listings-grid {
@@ -156,9 +158,19 @@
   .listings-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .profile-container {
     padding: 10px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .logout-button {
+    align-self: flex-end;
   }
 }
 
@@ -170,7 +182,7 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .user-info {
@@ -196,6 +208,7 @@
   margin: 0;
   color: #4a2500;
   font-size: 24px;
+  font-weight: 600;
 }
 
 .user-details p {
@@ -246,4 +259,50 @@
   outline: none;
   border-color: #4a2500;
   box-shadow: 0 0 0 2px rgba(74, 37, 0, 0.1);
+}
+
+/* Enhanced Profile Photo Upload Styling */
+.profile-photo-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.profile-photo-upload label {
+  font-weight: bold;
+  color: #4a2500;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profile-photo-upload input[type="file"] {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  width: fit-content;
+  max-width: 250px;
+}
+
+.profile-photo-upload input[type="file"]:hover {
+  border-color: #4a2500;
+  background-color: #f9f9f9;
+}
+.profile-photo-upload input[type="file"]:focus {
+  outline: none;
+  border-color: #4a2500;
+  box-shadow: 0 0 0 2px rgba(74, 37, 0, 0.1);
+}
+.profile-photo-upload input[type="file"]::file-selector-button {
+  background-color: #4a2500;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
 } 
