@@ -87,19 +87,19 @@ const ListItem = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
-
+  
     // Validate price
     if (!validatePrice(itemPrice)) {
       setError('Please enter a valid price (must be a positive number)');
       setLoading(false);
       return;
     }
-
+  
     try {
       console.log('Starting form submission process...');
       console.log('User ID:', user.uid);
       console.log('Form data:', { itemName, itemDescription, itemCategory, itemPrice });
-
+  
       // Upload image first
       const imageUrl = await handleImageUpload();
       if (!imageUrl) {
@@ -108,9 +108,9 @@ const ListItem = () => {
         setLoading(false);
         return;
       }
-
+  
       console.log('Image uploaded successfully, URL:', imageUrl);
-
+  
       // Create item data
       const itemData = {
         name: itemName,
@@ -120,16 +120,17 @@ const ListItem = () => {
         imageUrl,
         userId: user.uid,
         userEmail: user.email,
+        sellerName: user.displayName || 'Anonymous', // Ensure sellerName is included
         createdAt: new Date(),
-        status: 'available'
+        status: 'available',
       };
-
+  
       console.log('Creating Firestore document with data:', itemData);
-
+  
       // Add document to Firestore
       const docRef = await addDoc(collection(db, 'items'), itemData);
       console.log('Document created with ID:', docRef.id);
-
+  
       // Clear form
       setItemName('');
       setItemDescription('');
@@ -138,7 +139,6 @@ const ListItem = () => {
       setItemImage(null);
       setError('');
       setPopupMessage('Item listed successfully!');
-
     } catch (error) {
       console.error('Error in form submission:', error);
       setError(`Failed to list item: ${error.message}`);

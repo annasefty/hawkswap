@@ -17,11 +17,11 @@ const ListingDetail = () => {
   // Fetch listing data
   const fetchListing = useCallback(async () => {
     if (!id) return;
-    
+
     try {
       const docRef = doc(db, 'items', id);
       const docSnap = await getDoc(docRef);
-      
+
       if (docSnap.exists()) {
         setListing({ id: docSnap.id, ...docSnap.data() });
       } else {
@@ -38,7 +38,7 @@ const ListingDetail = () => {
   // // Check saved status
   // const checkSavedStatus = useCallback(async (userId) => {
   //   if (!userId || !id) return;
-    
+
   //   try {
   //     const savedQuery = query(
   //       collection(db, 'items'),
@@ -84,7 +84,7 @@ const ListingDetail = () => {
   //     });
 
   //     const savedItemsRef = collection(db, 'items');
-      
+
   //     const savedQuery = query(
   //       savedItemsRef,
   //       where('userId', '==', currentUser.uid),
@@ -92,7 +92,7 @@ const ListingDetail = () => {
   //     );
 
   //     const savedSnap = await getDocs(savedQuery);
-      
+
   //     if (savedSnap.empty) {
   //       const savedData = {
   //         userId: currentUser.uid,
@@ -104,7 +104,7 @@ const ListingDetail = () => {
   //         category: listing?.category || '',
   //         description: listing?.description || ''
   //       };
-        
+
   //       const docRef = await addDoc(collection(db, 'items'), savedData);
   //       setIsSaved(true);
   //       setError('');
@@ -132,32 +132,33 @@ const ListingDetail = () => {
     );
   }
 
-  if (error || !listing) {
-    return (
-      <div className="listing-detail-container error">
-        <p>{error || 'Listing not found'}</p>
-        <button className="back-button" onClick={() => navigate('/')}>Back to Home</button>
-      </div>
-    );
-  }
+  // if (error || !listing) {
+  //   return (
+  //     <div className="listing-detail-container error">
+  //       <p>{error || 'Listing not found'}</p>
+  //       <button className="back-button" onClick={() => navigate('/')}>Back to Home</button>
+  //     </div>
+  //   );
+  // }
+
 
   return (
     <div className="listing-detail-container">
       <button className="back-button" onClick={() => navigate(-1)}>
         ← Back
       </button>
-      
+
       {error && (
         <div className="error-message">
           {error}
         </div>
       )}
-      
+
       <div className="listing-detail-content">
         <div className="listing-image-container">
-          <img 
-            src={listing.imageUrl} 
-            alt={listing.name} 
+          <img
+            src={listing.imageUrl}
+            alt={listing.name}
             className="listing-detail-image"
             onError={(e) => {
               e.target.src = '/placeholder-image.jpg';
@@ -183,9 +184,10 @@ const ListingDetail = () => {
           <p className="description">{listing.description}</p>
           <p className="category">Category: {listing.category}</p>
           <p className="status">Status: {listing.status}</p>
-          
+
           <div className="seller-info">
             <h2>Seller Information</h2>
+            <h2>{listing.sellerName}</h2>
             <p className="seller-email">Contact: {listing.userEmail}</p>
             {listing.createdAt && (
               <p className="listing-date">
