@@ -17,7 +17,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* About Me section (unchanged) */}
+      {/* About Me section (unchanged)
       <section>
         <div className="text-container">
           <p>I created Hawk Swap during the winter break of 2024. As a Computer Science and Business student at Lehigh University, I am constantly looking for ways to combine my technical skills with my passion for helping others. When leaving school after the fall semester, I noticed that many girls in my sorority were preparing to go abroad, and they had a lot of furniture, clothes, and other items they wanted to get rid of. I saw this as a perfect opportunity to create a solution that would not only help them declutter but also bring the Lehigh community closer together.</p>
@@ -28,7 +28,7 @@ const About = () => {
           <p>(224)-661-1585</p>
         </div>
         <img src="/images/AnnaS.jpg" alt="Anna Seftenberg" className="right-image" />
-      </section>
+      </section> */}
 
       <footer>
         <p>&copy; Created by Anna Seftenberg. All rights reserved.</p>
