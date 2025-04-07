@@ -3,13 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import '../App.css';
 
-const PhotoGrid = ({ filter, categoryFilter }) => {
+const PhotoGrid = ({ user, filter, categoryFilter }) => {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
   const db = getFirestore();
 
   useEffect(() => {
     const fetchItems = async () => {
+      if (!user) return;
       try {
         const querySnapshot = await getDocs(collection(db, 'items'));
         const itemsData = querySnapshot.docs.map(doc => ({
@@ -23,7 +24,7 @@ const PhotoGrid = ({ filter, categoryFilter }) => {
     };
   
     fetchItems();
-  }, [db]);
+  }, [db, user]);
 
   const handleListingClick = (id) => {
     navigate(`/listing/${id}`);
