@@ -10,6 +10,7 @@ const ListItem = () => {
   const [itemName, setItemName] = useState('');
   const [itemDescription, setItemDescription] = useState('');
   const [itemCategory, setItemCategory] = useState('');
+  const [itemPrice, setItemPrice] = useState('');
   const [itemImage, setItemImage] = useState(null);
   const [error, setError] = useState('');
   const [popupMessage, setPopupMessage] = useState('');
@@ -51,15 +52,27 @@ const ListItem = () => {
     }
   };
 
+  const validatePrice = (price) => {
+    const priceFloat = parseFloat(price);
+    return !isNaN(priceFloat) && priceFloat >= 0;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
+    // Validate price
+    if (!validatePrice(itemPrice)) {
+      setError('Please enter a valid price (must be a positive number)');
+      setLoading(false);
+      return;
+    }
+
     try {
       console.log('Starting form submission process...');
       console.log('User ID:', user.uid);
-      console.log('Form data:', { itemName, itemDescription, itemCategory });
+      console.log('Form data:', { itemName, itemDescription, itemCategory, itemPrice });
 
       // Upload image first
       const imageUrl = await handleImageUpload();
@@ -77,6 +90,7 @@ const ListItem = () => {
         name: itemName,
         description: itemDescription,
         category: itemCategory,
+        price: parseFloat(itemPrice), // Store as number
         imageUrl,
         userId: user.uid,
         userEmail: user.email,
@@ -94,6 +108,7 @@ const ListItem = () => {
       setItemName('');
       setItemDescription('');
       setItemCategory('');
+      setItemPrice('');
       setItemImage(null);
       setError('');
       setPopupMessage('Item listed successfully!');
@@ -140,6 +155,19 @@ const ListItem = () => {
             ></textarea>
           </div>
           <div className="form-group">
+            <label htmlFor="itemPrice">Price ($)</label>
+            <input
+              type="number"
+              id="itemPrice"
+              value={itemPrice}
+              onChange={(e) => setItemPrice(e.target.value)}
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+              required
+            />
+          </div>
+          <div className="form-group">
             <label htmlFor="itemCategory">Category</label>
             <select
               id="itemCategory"
@@ -164,7 +192,6 @@ const ListItem = () => {
               onChange={(e) => setItemImage(e.target.files[0])}
               required
             />
-
           </div>
           <button type="submit" disabled={loading}>
             {loading ? 'Submitting...' : 'Submit'}

@@ -80,8 +80,9 @@ const PhotoGrid = ({ filter }) => {
                 )}
               </div>
               <h3>{item.name}</h3>
-              <p>{item.description}</p>
-              <p><strong>Category:</strong> {item.category}</p>
+              <p className="item-price">${item.price ? item.price.toFixed(2) : '0.00'}</p>
+              <p className="item-description">{item.description}</p>
+              <p className="item-category"><strong>Category:</strong> {item.category}</p>
             </div>
           ))
         )}
