@@ -64,7 +64,7 @@ const Header = ({ user, setUser }) => {
           <ul>
             <li><Link to="/about">About</Link></li>
             {user && <li><Link to="/listitem">List an Item</Link></li>}
-            {/* {user && <li><Link to="/saved">Saved Items</Link></li>} */}
+            {user && <li><Link to="/saved">Saved Listings</Link></li>}
           </ul>
         </nav>
         {user ? (

@@ -548,10 +548,13 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100vh; /* Full viewport height */
   text-align: center;
   background-color: #f4f4f4;
   color: #4a2500;
+  margin: 0; /* Remove any default margins */
+  padding: 0; /* Remove any default padding */
+  box-sizing: border-box; /* Ensure padding and borders are included in height */
 }
 
 .error-page h1 {

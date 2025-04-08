@@ -1,30 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
-import { Link } from 'react-router-dom'; // ✅ Add this line
+import { Link } from 'react-router-dom';
 
 const PhotoGrid = ({ user, filter, categoryFilter }) => {
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchListings = async () => {
-      try {
-        const querySnapshot = await getDocs(collection(db, 'items'));
-        const fetchedListings = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setListings(fetchedListings);
-      } catch (error) {
-        console.error('Error fetching listings:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchListings = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'items'));
+      const fetchedListings = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setListings(fetchedListings);
+    } catch (error) {
+      console.error('Error fetching listings:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchListings();
   }, []);
+
+  // Fetch listings again when the user logs in
+  useEffect(() => {
+    if (user) {
+      fetchListings();
+    }
+  }, [user]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -52,7 +59,7 @@ const PhotoGrid = ({ user, filter, categoryFilter }) => {
             to={`/listing/${listing.id}`}
             key={listing.id}
             className="photo-grid-item"
-            style={{ textDecoration: 'none', color: 'inherit' }} // ✅ preserves style
+            style={{ textDecoration: 'none', color: 'inherit' }}
           >
             <div className="image-container">
               <img

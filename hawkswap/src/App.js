@@ -10,7 +10,7 @@ import ListItem from './components/ListItem';
 import ErrorPage from './components/ErrorPage';
 import Profile from './components/Profile';
 import ListingDetail from './components/ListingDetail';
-// import SavedListings from './components/SavedListings';
+import SavedListings from './components/SavedListings';
 
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
@@ -118,7 +118,7 @@ const AppContent = ({
           <Route path="/about" element={<About />} />
           <Route path="/listitem" element={<ListItem user={user} />} />
           <Route path="/profile" element={<Profile user={user} />} />
-          {/* <Route path="/saved" element={<SavedListings />} /> */}
+          <Route path="/saved" element={<SavedListings />} />
           <Route path="/listing/:id" element={<ListingDetail />} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="*" element={<div>Page Not Found</div>} />

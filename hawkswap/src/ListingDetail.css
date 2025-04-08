@@ -2,7 +2,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  padding-top: 0; /* ✅ Removed default padding */
+  padding-top: 0;
 }
 
 .back-button {
@@ -84,12 +84,22 @@
   margin-top: 30px;
   padding-top: 20px;
   border-top: 1px solid #eee;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
 }
 
 .seller-info h2 {
   color: #4a2500;
   font-size: 24px;
   margin-bottom: 15px;
+}
+
+.seller-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .seller-email {
@@ -106,13 +116,6 @@
 .error {
   text-align: center;
   color: #f44336;
-}
-
-.listing-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
 }
 
 .error-message {
@@ -148,12 +151,52 @@
   height: 32px;
 }
 
-
-.seller-header {
+.report-listing-button-container {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 12px; /* Was 10px */
-  margin-bottom: 10px;
+  gap: 10px; /* ← this adds the spacing */
 }
 
 
+
+.report-button,
+.save-button {
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-family: 'Bebas Neue', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: none;
+}
+
+.report-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.report-button:hover {
+  background-color: #a71d2a;
+}
+
+.save-button {
+  background-color: #4a2500;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #3a1e00;
+}
+
+.listing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.listing-actions {
+  display: flex;
+  gap: 15px; /* Add spacing between buttons */
+}

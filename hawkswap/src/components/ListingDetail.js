@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { db, auth } from '../firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import {
+  doc,
+  getDoc,
+  collection,
+  addDoc,
+  deleteDoc,
+  getDocs,
+  serverTimestamp
+} from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import '../ListingDetail.css';
 
@@ -9,6 +17,10 @@ const ListingDetail = () => {
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [saveMessage, setSaveMessage] = useState('');
+  const [isSaved, setIsSaved] = useState(false);
+  const [savedDocId, setSavedDocId] = useState(null);
+
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -33,13 +45,81 @@ const ListingDetail = () => {
   }, [id]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, () => { });
+    const unsubscribe = onAuthStateChanged(auth, () => {});
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
     fetchListing();
   }, [fetchListing]);
+
+  // 🔍 Check if listing is saved
+  useEffect(() => {
+    const checkIfSaved = async () => {
+      if (!auth.currentUser || !listing) return;
+
+      try {
+        const savedRef = collection(db, 'savedListings');
+        const snapshot = await getDocs(savedRef);
+        const match = snapshot.docs.find(
+          (doc) =>
+            doc.data().userId === auth.currentUser.uid &&
+            doc.data().itemId === listing.id
+        );
+
+        if (match) {
+          setIsSaved(true);
+          setSavedDocId(match.id);
+        } else {
+          setIsSaved(false);
+          setSavedDocId(null);
+        }
+      } catch (error) {
+        console.error('Error checking saved listing:', error);
+      }
+    };
+
+    checkIfSaved();
+  }, [listing]);
+
+  const handleSaveListing = async () => {
+    if (!auth.currentUser) {
+      alert('Please log in to save this listing.');
+      return;
+    }
+
+    try {
+      const savedListing = {
+        userId: auth.currentUser.uid,
+        itemId: listing.id,
+        savedAt: serverTimestamp(),
+      };
+
+      const docRef = await addDoc(collection(db, 'savedListings'), savedListing);
+      setIsSaved(true);
+      setSavedDocId(docRef.id);
+      setSaveMessage('Listing saved successfully!');
+      setTimeout(() => setSaveMessage(''), 3000);
+    } catch (error) {
+      console.error('Error saving listing:', error);
+      alert('Failed to save listing. Please try again.');
+    }
+  };
+
+  const handleUnsaveListing = async () => {
+    if (!auth.currentUser || !savedDocId) return;
+
+    try {
+      await deleteDoc(doc(db, 'savedListings', savedDocId));
+      setIsSaved(false);
+      setSavedDocId(null);
+      setSaveMessage('Listing unsaved.');
+      setTimeout(() => setSaveMessage(''), 3000);
+    } catch (error) {
+      console.error('Error unsaving listing:', error);
+      alert('Failed to unsave listing. Please try again.');
+    }
+  };
 
   if (loading) {
     return (
@@ -55,11 +135,8 @@ const ListingDetail = () => {
         ← Back
       </button>
 
-      {error && (
-        <div className="error-message">
-          {error}
-        </div>
-      )}
+      {error && <div className="error-message">{error}</div>}
+      {saveMessage && <div className="success-message">{saveMessage}</div>}
 
       <div className="listing-detail-content">
         <div className="listing-image-container">
@@ -72,11 +149,37 @@ const ListingDetail = () => {
             }}
           />
         </div>
-
         <div className="listing-info">
           <div className="listing-header">
             <h1>{listing.name}</h1>
+            <div className="listing-actions">
+              <button
+                className="save-button"
+                onClick={isSaved ? handleUnsaveListing : handleSaveListing}
+              >
+                {isSaved ? 'Unsave Listing' : 'Save Listing'}
+              </button>
+              <button
+                className="report-button"
+                onClick={() => {
+                  const subject = encodeURIComponent(`Report: HawkSwap Listing - ${listing.name}`);
+                  const body = encodeURIComponent(
+                    `Hi,\n\nI would like to report the following listing on HawkSwap:\n\n` +
+                    `Listing Title: ${listing.name}\n` +
+                    `Seller: ${listing.sellerName}\n` +
+                    `Price: $${listing.price?.toFixed(2)}\n` +
+                    `Category: ${listing.category}\n\n` +
+                    `Reason for reporting:\n[Please describe the issue here]\n\nThank you.`
+                  );
+                  const mailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=ans427@lehigh.edu&su=${subject}&body=${body}`;
+                  window.open(mailUrl, '_blank');
+                }}
+              >
+                Report Listing
+              </button>
+            </div>
           </div>
+
           <p className="price">${listing.price ? listing.price.toFixed(2) : '0.00'}</p>
           <p className="description">{listing.description}</p>
           <p className="category">Category: {listing.category}</p>
@@ -110,7 +213,6 @@ const ListingDetail = () => {
               </p>
             )}
           </div>
-
         </div>
       </div>
     </div>
