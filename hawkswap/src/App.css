@@ -6,50 +6,12 @@ body {
   background-color: #f4f4f4;
 }
 
-/* Header styles */
-.header {
-  background-color: #4a2500;
-  color: white;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 10px;
-}
-
-.logo-img {
-  width: auto;
-  object-fit: contain;
-}
-
 .main-content {
   padding-top: 0;
 }
 
 .padding-under-header {
   padding-top: 120px;
-}
-
-.logo-img:hover {
-  transform: scale(1.05);
-  border-color: rgba(255, 255, 255, 0.8);
-}
-
-.nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.nav ul li a {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.nav ul li a:hover {
-  text-decoration: underline;
 }
 
 /* Grid base styles */
@@ -95,85 +57,31 @@ body {
 
 /* Mobile styles */
 @media screen and (max-width: 767px) {
-  .header {
-    height: auto;
-    min-height: 60px;
-  }
-
-  .header-left {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 5px;
-  }
-
-  .logo-img {
-    height: 40px;
-  }
-
-  .header-title {
-    font-size: 20px;
-    margin: 5px 0;
-  }
-
-  .nav ul {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-  }
-
-  .nav ul li a {
-    font-size: 16px;
-  }
-
   .main-content {
-    padding-top: 80px; /* For mobile */
+    padding-top: 0px;
+    padding-bottom: 15px;
   }
-  
-  
 
   .photo-grid {
-    display: grid;
-    justify-content: center;
-    /* Centers the grid horizontally */
-    align-items: center;
-    /* Centers the grid vertically if there's enough space */
-    margin: 0 auto;
-    /* Centers the grid container itself */
-    gap: 40px;
-    padding: 20px;
-    max-width: 1400px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 15px;
   }
 
-  
   .photo-grid-item {
     width: 100%;
-    max-width: 400px;
-    /* limits it a bit for readability */
-    background: white;
-    border-radius: 8px;
+    max-width: 350px;
+    margin: 0 auto 10px auto;
     padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
   }
+
   .image-container {
-    width: 100%;
-    height: auto;         /* Let height scale with width */
-    aspect-ratio: 1 / 1;  /* Square ratio */
-    overflow: hidden;
-    border-radius: 4px;
-    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    margin-bottom: 15px;
   }
-  
-  .photo-grid-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;    /* Crops to fill the square cleanly */
-    display: block;
-  }
-  
 
   .item-title {
     font-size: 24px;
@@ -231,16 +139,16 @@ body {
     padding: 15px;
   }
 
-  .search-filter-container {
-    flex-direction: column;
-    gap: 15px;
-    padding: 10 15px;
-    padding-top: 15px;
-  }
-
   .search-field,
   .category-filter {
     width: 100%;
+    margin: 5px 0; /* Adds vertical spacing between the inputs */
+  }
+
+  .search-filter-container {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
   }
 
   .faq-container,
@@ -276,47 +184,6 @@ body {
 
 /* Desktop styles */
 @media screen and (min-width: 768px) {
-  .header {
-    height: 120px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2rem;
-  }
-
-  .header-left {
-    display: flex;
-    align-items: center;
-  }
-
-  .logo-img {
-    height: 80px;
-  }
-
-  .header-title {
-    font-size: 28px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .header-right {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .nav ul {
-    display: flex;
-    gap: 20px;
-  }
-
-  .nav ul li a {
-    font-size: 18px;
-  }
-
   .main-content {
     padding-top: 120px;
   }
@@ -343,30 +210,6 @@ body {
 }
 
 /* Shared styles */
-.google-signin-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: white;
-  padding: 5px 10px;
-}
-
-.google-logo {
-  height: 24px;
-  width: auto;
-}
-
-.google-profile-pic {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid white;
-}
-
 .search {
   width: 100%;
   position: relative;
@@ -420,33 +263,6 @@ body {
   color: #666;
 }
 
-.login-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(74, 37, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.login-overlay span {
-  color: white;
-  font-size: 16px;
-  padding: 8px 16px;
-  border: 2px solid white;
-  border-radius: 4px;
-  background-color: rgba(74, 37, 0, 0.8);
-}
-
-.not-logged-in:hover .login-overlay {
-  opacity: 1;
-}
-
 .no-results {
   width: 100%;
   text-align: center;
@@ -461,121 +277,6 @@ body {
   font-size: 14px;
   text-align: center;
   margin-top: 10px;
-}
-
-.profile-button {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  background-color: #4a2500;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  flex-shrink: 0;
-}
-
-.profile-button:hover {
-  transform: scale(1.05);
-  border-color: rgba(255, 255, 255, 0.8);
-}
-
-.profile-button:active {
-  transform: scale(0.95);
-}
-
-.login-popup {
-  position: fixed;
-  top: 140px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #4a2500;
-  color: white;
-  padding: 15px 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  animation: slideDown 0.3s ease-out, fadeOut 0.3s ease-in 2.7s;
-}
-
-.login-popup p {
-  margin: 0;
-  font-size: 16px;
-}
-
-@keyframes slideDown {
-  from {
-    transform: translate(-50%, -100%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translate(-50%, 0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-  }
-}
-
-.profile-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #4a2500;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  border: 2px solid transparent;
-}
-
-.profile-circle:hover {
-  background-color: #613200;
-  border-color: #ffffff;
-  transform: scale(1.05);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.profile-link {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  overflow: hidden;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  flex-shrink: 0;
-}
-
-.profile-image {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.profile-link:hover .profile-image {
-  transform: scale(1.05);
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
 }
 
 .MuiTextField-root {
@@ -658,114 +359,4 @@ body {
   color: #666;
   font-weight: bold;
   margin-top: 120px;
-}
-
-/* Hamburger icon */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 4px;
-  margin-left: auto;
-  padding: 8px;
-}
-
-.hamburger .bar {
-  height: 3px;
-  width: 25px;
-  background-color: white;
-  border-radius: 2px;
-}
-
-.hamburger .close-icon {
-  font-size: 28px;
-  color: white;
-  line-height: 1;
-}
-
-/* Mobile-only and desktop-only utilities */
-.mobile-only {
-  display: none;
-}
-
-.desktop-only {
-  display: flex;
-}
-
-/* Mobile dropdown menu */
-.mobile-menu {
-  display: none;
-  position: absolute;
-  top: 60px;
-  left: 0;
-  right: 0;
-  background-color: #4a2500;
-  padding: 15px 20px;
-  z-index: 999;
-}
-
-.mobile-menu.open {
-  display: flex;
-}
-
-.mobile-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.mobile-menu li {
-  margin-bottom: 15px;
-}
-
-.mobile-menu li a,
-.mobile-menu button {
-  color: white;
-  font-size: 16px;
-  text-decoration: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* Mobile header layout adjustments */
-@media screen and (max-width: 767px) {
-  .desktop-only {
-    display: none;
-  }
-
-  .mobile-only {
-    display: flex;
-  }
-
-  .header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    /* padding: 10px; */
-    position: relative;
-    height: auto;
-  }
-
-  .header-title {
-    font-size: 16px;
-    text-align: center;
-    flex-grow: 1;
-    margin: 0;
-  }
-
-  .header-left {
-    flex-shrink: 0;
-  }
-
-  .logo-img {
-    height: 30px;
-  }
-
-  .google-profile-pic {
-    height: 36px;
-    width: 36px;
-    border-radius: 50%;
-  }
 }

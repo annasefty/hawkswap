@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, provider } from "../firebase";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
-import "../App.css";
+import "../Header.css";
 
 const Header = ({ user, setUser }) => {
   const navigate = useNavigate();
