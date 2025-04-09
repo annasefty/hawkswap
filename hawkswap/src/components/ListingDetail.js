@@ -53,7 +53,6 @@ const ListingDetail = () => {
     fetchListing();
   }, [fetchListing]);
 
-  // 🔍 Check if listing is saved
   useEffect(() => {
     const checkIfSaved = async () => {
       if (!auth.currentUser || !listing) return;
@@ -131,9 +130,37 @@ const ListingDetail = () => {
 
   return (
     <div className="listing-detail-container">
-      <button className="back-button" onClick={() => navigate(-1)}>
-        ← Back
-      </button>
+      <div className="mobile-header-row">
+        <button className="back-button" onClick={() => navigate(-1)}>
+          ← Back
+        </button>
+        <div className="mobile-actions">
+          <button
+            className={`save-button ${isSaved ? 'saved' : ''}`}
+            onClick={isSaved ? handleUnsaveListing : handleSaveListing}
+          >
+            {isSaved ? 'Unsave' : 'Save'}
+          </button>
+          <button
+            className="report-button"
+            onClick={() => {
+              const subject = encodeURIComponent(`Report: HawkSwap Listing - ${listing.name}`);
+              const body = encodeURIComponent(
+                `Hi,\n\nI would like to report the following listing on HawkSwap:\n\n` +
+                `Listing Title: ${listing.name}\n` +
+                `Seller: ${listing.sellerName}\n` +
+                `Price: $${listing.price?.toFixed(2)}\n` +
+                `Category: ${listing.category}\n\n` +
+                `Reason for reporting:\n[Please describe the issue here]\n\nThank you.`
+              );
+              const mailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=ans427@lehigh.edu&su=${subject}&body=${body}`;
+              window.open(mailUrl, '_blank');
+            }}
+          >
+            Report
+          </button>
+        </div>
+      </div>
 
       {error && <div className="error-message">{error}</div>}
       {saveMessage && <div className="success-message">{saveMessage}</div>}
@@ -154,7 +181,7 @@ const ListingDetail = () => {
             <h1>{listing.name}</h1>
             <div className="listing-actions">
               <button
-                className="save-button"
+                className={`save-button ${isSaved ? 'saved' : ''}`}
                 onClick={isSaved ? handleUnsaveListing : handleSaveListing}
               >
                 {isSaved ? 'Unsave Listing' : 'Save Listing'}

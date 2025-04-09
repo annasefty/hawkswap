@@ -98,7 +98,6 @@ body {
   .header {
     height: auto;
     min-height: 60px;
-    padding: 10px;
   }
 
   .header-left {
@@ -129,26 +128,43 @@ body {
   }
 
   .main-content {
-    padding-top: 100px;
-    padding-bottom: 20px;
+    padding-top: 0px;
+    padding-bottom: 15px;
   }
 
   .photo-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 15px;
+    display: grid;
+    justify-content: center; /* Centers the grid horizontally */
+    align-items: center; /* Centers the grid vertically if there's enough space */
+    margin: 0 auto; /* Centers the grid container itself */
+    gap: 40px;
+    padding: 20px;
+    max-width: 1400px;
   }
-
+  
   .photo-grid-item {
-    width: 100%;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures content inside the item is centered */
     padding: 15px;
-    margin-bottom: 10px;
   }
+  
+  
 
   .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 250px;
     margin-bottom: 15px;
   }
+  
 
   .item-title {
     font-size: 24px;
@@ -209,7 +225,8 @@ body {
   .search-filter-container {
     flex-direction: column;
     gap: 15px;
-    padding: 0 15px;
+    padding: 10 15px;
+    padding-top: 15px;
   }
 
   .search-field,
@@ -241,7 +258,9 @@ body {
     font-size: 16px;
   }
 
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     font-size: 1.5em;
   }
 }
@@ -483,6 +502,7 @@ body {
     transform: translate(-50%, -100%);
     opacity: 0;
   }
+
   to {
     transform: translate(-50%, 0);
     opacity: 1;
@@ -493,6 +513,7 @@ body {
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }
@@ -637,6 +658,7 @@ body {
   cursor: pointer;
   gap: 4px;
   margin-left: auto;
+  padding: 8px;
 }
 
 .hamburger .bar {
@@ -646,7 +668,13 @@ body {
   border-radius: 2px;
 }
 
-/* Mobile-only elements */
+.hamburger .close-icon {
+  font-size: 28px;
+  color: white;
+  line-height: 1;
+}
+
+/* Mobile-only and desktop-only utilities */
 .mobile-only {
   display: none;
 }
@@ -655,7 +683,7 @@ body {
   display: flex;
 }
 
-/* Mobile menu */
+/* Mobile dropdown menu */
 .mobile-menu {
   display: none;
   position: absolute;
@@ -668,7 +696,7 @@ body {
 }
 
 .mobile-menu.open {
-  display: block;
+  display: flex;
 }
 
 .mobile-menu ul {
@@ -691,7 +719,7 @@ body {
   cursor: pointer;
 }
 
-/* Responsive logic */
+/* Mobile header layout adjustments */
 @media screen and (max-width: 767px) {
   .desktop-only {
     display: none;
@@ -702,18 +730,33 @@ body {
   }
 
   .header {
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    /* padding: 10px; */
+    position: relative;
+    height: auto;
   }
 
   .header-title {
     font-size: 16px;
+    text-align: center;
+    flex-grow: 1;
+    margin: 0;
+  }
+
+  .header-left {
+    flex-shrink: 0;
+  }
+
+  .logo-img {
+    height: 30px;
   }
 
   .google-profile-pic {
     height: 36px;
     width: 36px;
+    border-radius: 50%;
   }
 }
-

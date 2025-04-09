@@ -155,7 +155,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 10px; /* ← this adds the spacing */
+  gap: 10px;
+  /* ← this adds the spacing */
 }
 
 
@@ -183,11 +184,28 @@
 .save-button {
   background-color: #4a2500;
   color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 5px;
+  font-family: 'Bebas Neue', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: none;
+}
+
+.save-button.saved {
+  background-color: #ccc; /* Change this to any "unsave" tone you like */
+  color: #333;
 }
 
 .save-button:hover {
   background-color: #3a1e00;
 }
+
+.save-button.saved:hover {
+  background-color: #999;
+}
+
 
 .listing-header {
   display: flex;
@@ -198,5 +216,106 @@
 
 .listing-actions {
   display: flex;
-  gap: 15px; /* Add spacing between buttons */
+  gap: 15px;
+  /* Add spacing between buttons */
+}
+@media screen and (min-width: 768px) {
+  .mobile-actions {
+    display: none;
+  }
+}
+
+
+
+/*Mobile*/
+/* Mobile styles */
+@media screen and (max-width: 767px) {
+  .listing-header .listing-actions {
+    display: none;
+  }
+
+  .mobile-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .mobile-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .listing-detail-content {
+    grid-template-columns: 1fr;
+  }
+  .mobile-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px;
+  }
+
+  .mobile-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .save-button,
+  .report-button {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+  
+  .back-button {
+    background-color: #4a2500;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .listing-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0px;
+    padding-top: 0;
+  }
+
+  .listing-info {
+    display: block;
+    flex-direction: column;
+    gap: 15px;
+    grid-column: 1 / -1;
+  }
+
+  .listing-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .listing-actions {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .listing-title {
+    color: #4a2500;
+    font-size: 28px;
+    margin: 0;
+  }
+  
+
 }

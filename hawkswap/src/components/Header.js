@@ -53,18 +53,22 @@ const Header = ({ user, setUser }) => {
 
   return (
     <header className="header">
-      <div className="header-left">
-        <Link to="/">
-          <img src="/images/Logo.png" alt="Hawk Swap Logo" className="logo-img" />
-        </Link>
-      </div>
+      <Link to="/" className="header-left">
+        <img src="/images/Logo.png" alt="Hawk Swap Logo" className="logo-img" />
+      </Link>
 
       <h1 className="header-title">HAWKSWAP MARKETPLACE</h1>
 
       <div className="hamburger mobile-only" onClick={toggleMenu}>
-        <span className="bar" />
-        <span className="bar" />
-        <span className="bar" />
+        {menuOpen ? (
+          <span className="close-icon">&times;</span>
+        ) : (
+          <>
+            <span className="bar" />
+            <span className="bar" />
+            <span className="bar" />
+          </>
+        )}
       </div>
 
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
