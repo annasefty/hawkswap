@@ -148,9 +148,7 @@ body {
 
   
   .photo-grid-item {
-    max-width: 350px;
     width: 100%;
-    margin: 0 auto; /* Center */
     max-width: 400px;
     /* limits it a bit for readability */
     background: white;
