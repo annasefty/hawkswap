@@ -128,9 +128,10 @@ body {
   }
 
   .main-content {
-    padding-top: 0px;
-    padding-bottom: 15px;
+    padding-top: 80px; /* For mobile */
   }
+  
+  
 
   .photo-grid {
     display: grid;
@@ -145,8 +146,11 @@ body {
     max-width: 1400px;
   }
 
+  
   .photo-grid-item {
+    max-width: 350px;
     width: 100%;
+    margin: 0 auto; /* Center */
     max-width: 400px;
     /* limits it a bit for readability */
     background: white;
@@ -156,18 +160,22 @@ body {
     display: flex;
     flex-direction: column;
   }
-
-
-
-
   .image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 250px;
-    margin-bottom: 15px;
+    width: 100%;
+    height: auto;         /* Let height scale with width */
+    aspect-ratio: 1 / 1;  /* Square ratio */
+    overflow: hidden;
+    border-radius: 4px;
+    margin-bottom: 10px;
   }
-
+  
+  .photo-grid-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    /* Crops to fill the square cleanly */
+    display: block;
+  }
+  
 
   .item-title {
     font-size: 24px;
