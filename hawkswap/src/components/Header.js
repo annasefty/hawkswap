@@ -1,19 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, provider } from "../firebase"; // Import Firebase auth and provider
-import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth"; // Import sign-in and sign-out methods
+import { auth, provider } from "../firebase";
+import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import "../App.css";
 
 const Header = ({ user, setUser }) => {
-  const navigate = useNavigate(); // Hook to navigate between pages
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  React.useEffect(() => {
-    // Listen for auth state changes
+  useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser && currentUser.email.endsWith("@lehigh.edu")) {
         setUser(currentUser);
       } else if (currentUser) {
-        // If user is signed in but not with Lehigh email
         signOut(auth).then(() => {
           setUser(null);
           navigate("/error");
@@ -23,32 +22,33 @@ const Header = ({ user, setUser }) => {
       }
     });
 
-    // Cleanup subscription
     return () => unsubscribe();
-  }, [setUser, navigate]); // Added missing dependencies
+  }, [setUser, navigate]);
 
   const handleGoogleSignIn = async () => {
     try {
-      const result = await signInWithPopup(auth, provider); // Trigger Google sign-in popup
-      const user = result.user; // Get the signed-in user's information
-
-      // Verify the email domain
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
       if (user.email.endsWith("@lehigh.edu")) {
-        setUser(user); // Store the user info in state
+        setUser(user);
       } else {
-        // If the email is not from @lehigh.edu, sign out the user and navigate to the error page
         await signOut(auth);
         setUser(null);
-        navigate("/error"); // Redirect to the error page
+        navigate("/error");
       }
     } catch (error) {
-      console.error("Error signing in with Google:", error); // Handle errors
-      navigate("/error"); // Redirect to the error page on error
+      console.error("Error signing in with Google:", error);
+      navigate("/error");
     }
   };
 
   const handleProfileClick = () => {
-    navigate('/profile');
+    navigate("/profile");
+    setMenuOpen(false);
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
   };
 
   return (
@@ -58,8 +58,40 @@ const Header = ({ user, setUser }) => {
           <img src="/images/Logo.png" alt="Hawk Swap Logo" className="logo-img" />
         </Link>
       </div>
+
       <h1 className="header-title">HAWKSWAP MARKETPLACE</h1>
-      <div className="header-right">
+
+      <div className="hamburger mobile-only" onClick={toggleMenu}>
+        <span className="bar" />
+        <span className="bar" />
+        <span className="bar" />
+      </div>
+
+      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+        <ul>
+          <li><Link to="/about" onClick={toggleMenu}>About</Link></li>
+          {user && <li><Link to="/listitem" onClick={toggleMenu}>List an Item</Link></li>}
+          {user && <li><Link to="/saved" onClick={toggleMenu}>Saved Listings</Link></li>}
+          {user ? (
+            <li onClick={handleProfileClick}>
+              <img
+                src={user.photoURL}
+                alt={user.displayName}
+                className="google-profile-pic"
+              />
+            </li>
+          ) : (
+            <li>
+              <button className="google-signin-button" onClick={handleGoogleSignIn}>
+                <img src="/images/google-logo.png" alt="Google Logo" className="google-logo" />
+                Sign in with Google
+              </button>
+            </li>
+          )}
+        </ul>
+      </div>
+
+      <div className="header-right desktop-only">
         <nav className="nav">
           <ul>
             <li><Link to="/about">About</Link></li>
@@ -68,16 +100,8 @@ const Header = ({ user, setUser }) => {
           </ul>
         </nav>
         {user ? (
-          <div 
-            className="profile-button"
-            onClick={handleProfileClick}
-            title="View Profile"
-          >
-            <img
-              src={user.photoURL}
-              alt={user.displayName}
-              className="google-profile-pic"
-            />
+          <div className="profile-button" onClick={handleProfileClick} title="View Profile">
+            <img src={user.photoURL} alt={user.displayName} className="google-profile-pic" />
           </div>
         ) : (
           <button className="google-signin-button" onClick={handleGoogleSignIn}>
