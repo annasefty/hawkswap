@@ -233,8 +233,10 @@
     cursor: pointer;
     gap: 4px;
     margin-left: auto;
+    margin-right: 12px; /* 🆕 Push it inward from the right edge */
     padding: 8px;
   }
+  
   
   .hamburger .bar {
     height: 3px;
@@ -294,16 +296,21 @@
     cursor: pointer;
   }
   
-  /* Responsive layout */
+  /* Mobile */
   @media screen and (max-width: 767px) {
     .header {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-      height: auto;
-    }
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1000;
+        background-color: #4a2500;
+      }
   
     .header-left {
       flex-shrink: 0;
