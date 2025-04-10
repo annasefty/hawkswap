@@ -57,7 +57,7 @@ const Header = ({ user, setUser }) => {
         <img src="/images/Logo.png" alt="Hawk Swap Logo" className="logo-img" />
       </Link>
 
-      <h1 className="header-title">HAWKSWAP MARKETPLACE</h1>
+      <h1 className="header-title">HAWK SWAP MARKETPLACE</h1>
 
       <div className="hamburger mobile-only" onClick={toggleMenu}>
         {menuOpen ? (
