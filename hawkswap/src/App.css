@@ -14,6 +14,10 @@ body {
   padding-top: 120px;
 }
 
+.no-results {
+  text-align: center;
+}
+
 /* Grid base styles */
 .photo-grid {
   display: grid;
@@ -270,14 +274,6 @@ body {
   color: #666;
 }
 
-.no-results {
-  width: 100%;
-  text-align: center;
-  padding: 40px;
-  font-size: 18px;
-  color: #666;
-  grid-column: 1 / -1;
-}
 
 .error-message {
   color: red;
@@ -366,5 +362,7 @@ body {
   font-size: 18px;
   color: #666;
   font-weight: bold;
-  margin-top: 120px;
+  height: 50vh; /* adjust as needed */
+  width: 100%;
 }
+
