@@ -1,72 +1,92 @@
 /* About.css */
 body {
-    font-family: 'Georgia', Times, serif, sans-serif;
-    margin: 20px;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
-  
-  
-  section {
-    font-family: 'Georgia', Times, serif, sans-serif;
-    display: flex;                
-    align-items: center;          
-    justify-content: flex-start;  
-    padding: 20px;
-    margin: 20px auto 0;         
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 100%;               
-  }
-  
-  .text-container {
-    flex: 1;                       
-    margin-right: 20px;             
-  }
-  
-  .right-image {
-    max-width: 35%;                 
-    height: auto;                   
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+  font-family: 'Georgia', Times, serif, sans-serif;
+  margin: 20px;
+  padding: 0;
+  background-color: #f4f4f4;
+}
 
-  .faq-section {
-    /* font-family: 'Georgia', Times, serif, sans-serif; */
-    font-family: 'Bebas Neue', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-    margin: 20px auto 0;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 100%;
-  }
-  
-  .faq-shell-box {
-    background-color: #e0e0e0;
-    border-radius: 8px;
-    padding: 20px;
-    width: 100%;
-  }
-  
-  .faq-shell-box h2 {
-    font-size: 28px; /* Make the header larger */
-    margin-bottom: 16px;
-  }
-  
-  .faq-shell-box li {
-    font-size: 18px; /* Increase font size for questions/answers */
-    margin-bottom: 12px;
-    line-height: 1.5;
-  }
-  
-  
-  .faq-shell-box ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
+
+section,
+.faq-section {
+  font-family: 'Georgia', Times, serif, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  margin: 20px auto 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  max-width: 900px;
+  /* 👈 sets max width of content */
+  padding: 20px 30px;
+  /* 👈 adds padding to left and right */
+  width: 90%;
+  /* 👈 allows responsiveness on small screens */
+}
+
+.text-container {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.right-image {
+  max-width: 35%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.faq-section {
+  /* font-family: 'Georgia', Times, serif, sans-serif; */
+  font-family: 'Bebas Neue', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  margin: 20px auto 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+}
+
+.faq-shell-box {
+  background-color: #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+}
+
+.faq-shell-box h2 {
+  font-size: 28px;
+  /* Make the header larger */
+  margin-bottom: 16px;
+}
+
+.faq-shell-box li {
+  font-size: 18px;
+  /* Increase font size for questions/answers */
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+
+.faq-shell-box ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-container {
+  max-width: 900px;
+  width: 90%;
+  margin: 20px auto 0;
+  padding-left: 30px;
+  /* aligns with .faq-section's left padding */
+  padding-right: 30px;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+}

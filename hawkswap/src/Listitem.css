@@ -9,11 +9,14 @@ body {
 
 .list-item-form {
   max-width: 600px;
-  margin: 0 auto;
+  margin-top: 50px;
+  margin: 60px auto 0 auto;
+  padding-top: 10px;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: #4a2500;
 }
 
 .list-item-form h1 {
@@ -54,6 +57,7 @@ button[type='submit'] {
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 button[type='submit']:hover {

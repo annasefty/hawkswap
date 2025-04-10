@@ -30,9 +30,10 @@ const About = () => {
         <img src="/images/AnnaS.jpg" alt="Anna Seftenberg" className="right-image" />
       </section> */}
 
-      <footer>
+      <footer className="footer-container">
         <p>&copy; Created by Anna Seftenberg. All rights reserved.</p>
       </footer>
+
     </div>
   );
 }

@@ -27,12 +27,43 @@
 .listing-detail-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: stretch; /* Ensures both columns stretch equally */
   gap: 40px;
   background: white;
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.seller-info-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.seller-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.seller-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px; /* Increased space between text and image */
+}
+
+.seller-profile-pic {
+  height: 100px; /* Made it bigger */
+  width: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4a2500;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  margin-right: 100px;
+}
+
 
 .listing-image-container {
   width: 100%;
@@ -87,6 +118,7 @@
   padding: 20px;
   border: 2px solid #ccc;
   border-radius: 10px;
+  
 }
 
 .seller-info h2 {
@@ -316,6 +348,16 @@
     font-size: 28px;
     margin: 0;
   }
-  
+  .seller-info-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .seller-profile-pic {
+    margin-right: 0;
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
 
 }

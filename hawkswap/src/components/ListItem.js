@@ -122,6 +122,7 @@ const ListItem = () => {
         userEmail: user.email,
         sellerName: user.displayName || 'Anonymous', // Ensure sellerName is included
         createdAt: new Date(),
+        sellerPhotoUrl: user.photoURL,
         status: 'available',
       };
   

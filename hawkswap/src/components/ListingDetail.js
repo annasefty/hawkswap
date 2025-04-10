@@ -45,7 +45,7 @@ const ListingDetail = () => {
   }, [id]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, () => {});
+    const unsubscribe = onAuthStateChanged(auth, () => { });
     return () => unsubscribe();
   }, []);
 
@@ -213,32 +213,41 @@ const ListingDetail = () => {
           <p className="status">Status: {listing.status}</p>
 
           <div className="seller-info">
-            <h2>Seller Information</h2>
-            <div className="seller-header">
-              <h2>{listing.sellerName}</h2>
-              <button
-                className="gmail-button"
-                onClick={() => {
-                  const subject = encodeURIComponent('Interested in your Hawk Swap listing');
-                  const body = encodeURIComponent(
-                    `Hi ${listing.sellerName},\n\nI'm interested in your listing for "${listing.name}". Is it still available?\n\nThanks!`
-                  );
-                  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${listing.userEmail}&su=${subject}&body=${body}`;
-                  window.open(gmailUrl, '_blank');
-                }}
-              >
-                <img
-                  src="https://www.gstatic.com/images/branding/product/1x/gmail_2020q4_48dp.png"
-                  alt="Gmail logo"
-                  className="gmail-icon"
-                />
-              </button>
+            <div className="seller-info-row">
+              <div className="seller-info-text">
+                <h2>Seller Information</h2>
+                <div className="seller-header">
+                  <h2>{listing.sellerName}</h2>
+                  <button
+                    className="gmail-button"
+                    onClick={() => {
+                      const subject = encodeURIComponent('Interested in your Hawk Swap listing');
+                      const body = encodeURIComponent(
+                        `Hi ${listing.sellerName},\n\nI'm interested in your listing for "${listing.name}". Is it still available?\n\nThanks!`
+                      );
+                      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${listing.userEmail}&su=${subject}&body=${body}`;
+                      window.open(gmailUrl, '_blank');
+                    }}
+                  >
+                    <img
+                      src="https://www.gstatic.com/images/branding/product/1x/gmail_2020q4_48dp.png"
+                      alt="Gmail logo"
+                      className="gmail-icon"
+                    />
+                  </button>
+                </div>
+                {listing.createdAt && (
+                  <p className="listing-date">
+                    Listed on: {new Date(listing.createdAt.toDate()).toLocaleDateString()}
+                  </p>
+                )}
+              </div>
+              <img
+                src={listing.sellerPhotoUrl || '/images/default-profile.png'}
+                alt={`${listing.sellerName}'s profile`}
+                className="seller-profile-pic"
+              />
             </div>
-            {listing.createdAt && (
-              <p className="listing-date">
-                Listed on: {new Date(listing.createdAt.toDate()).toLocaleDateString()}
-              </p>
-            )}
           </div>
         </div>
       </div>
