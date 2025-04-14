@@ -2,7 +2,8 @@
   {
     "origin": [
       "http://localhost:3000",
-      "https://www.hawkswaplu.com/"
+      "https://www.hawkswaplu.com/",
+      "https://hawkswap.vercel.app/"
     ],
     "responseHeader": ["Content-Type", "Access-Control-Allow-Origin", "Authorization"],
     "methods": ["GET", "HEAD", "DELETE", "PUT", "POST", "OPTIONS"],
