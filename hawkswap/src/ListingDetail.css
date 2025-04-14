@@ -18,6 +18,7 @@
   align-items: center;
   gap: 8px;
   transition: background-color 0.2s;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .back-button:hover {
@@ -27,13 +28,14 @@
 .listing-detail-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: stretch; /* Ensures both columns stretch equally */
+  align-items: stretch;
   gap: 40px;
   background: white;
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .seller-info-text {
   flex: 1;
   display: flex;
@@ -46,16 +48,18 @@
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
+  margin-bottom: 10px;
 }
+
 .seller-info-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 30px; /* Increased space between text and image */
+  gap: 30px;
 }
 
 .seller-profile-pic {
-  height: 100px; /* Made it bigger */
+  height: 100px;
   width: 100px;
   border-radius: 50%;
   object-fit: cover;
@@ -63,7 +67,6 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   margin-right: 100px;
 }
-
 
 .listing-image-container {
   width: 100%;
@@ -118,20 +121,12 @@
   padding: 20px;
   border: 2px solid #ccc;
   border-radius: 10px;
-  
 }
 
 .seller-info h2 {
   color: #4a2500;
   font-size: 24px;
   margin-bottom: 15px;
-}
-
-.seller-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
 }
 
 .seller-email {
@@ -188,20 +183,21 @@
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  /* ← this adds the spacing */
 }
 
-
-
+/* Unified Save/Unsave and Report button styles */
 .report-button,
-.save-button {
+.save-button,
+.save-button.saved {
   padding: 10px 16px;
   font-size: 16px;
-  border-radius: 5px;
   font-family: 'Bebas Neue', sans-serif;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s ease;
   border: none;
+  min-width: 130px;
+  text-align: center;
 }
 
 .report-button {
@@ -216,28 +212,20 @@
 .save-button {
   background-color: #4a2500;
   color: white;
-  padding: 10px 16px;
-  font-size: 16px;
-  border-radius: 5px;
-  font-family: 'Bebas Neue', sans-serif;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  border: none;
-}
-
-.save-button.saved {
-  background-color: #ccc; /* Change this to any "unsave" tone you like */
-  color: #333;
 }
 
 .save-button:hover {
   background-color: #3a1e00;
 }
 
+.save-button.saved {
+  background-color: #ccc;
+  color: #333;
+}
+
 .save-button.saved:hover {
   background-color: #999;
 }
-
 
 .listing-header {
   display: flex;
@@ -249,17 +237,15 @@
 .listing-actions {
   display: flex;
   gap: 15px;
-  /* Add spacing between buttons */
+  align-items: center;
 }
+
 @media screen and (min-width: 768px) {
   .mobile-actions {
     display: none;
   }
 }
 
-
-
-/*Mobile*/
 /* Mobile styles */
 @media screen and (max-width: 767px) {
   .listing-header .listing-actions {
@@ -271,21 +257,6 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-  }
-
-  .mobile-actions {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .listing-detail-content {
-    grid-template-columns: 1fr;
-  }
-  .mobile-header-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
     gap: 10px;
   }
 
@@ -295,11 +266,13 @@
   }
 
   .save-button,
-  .report-button {
+  .report-button,
+  .save-button.saved {
     padding: 8px 12px;
     font-size: 14px;
+    min-width: 110px;
   }
-  
+
   .back-button {
     background-color: #4a2500;
     color: white;
@@ -337,17 +310,13 @@
     align-items: flex-start;
     gap: 10px;
   }
-  
-  .listing-actions {
-    display: flex;
-    gap: 15px;
-  }
-  
+
   .listing-title {
     color: #4a2500;
     font-size: 28px;
     margin: 0;
   }
+
   .seller-info-row {
     flex-direction: column;
     align-items: center;
@@ -359,5 +328,4 @@
     margin-top: 10px;
     margin-bottom: 30px;
   }
-
 }
