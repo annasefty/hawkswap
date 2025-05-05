@@ -11,6 +11,7 @@ import ErrorPage from './components/ErrorPage';
 import Profile from './components/Profile';
 import ListingDetail from './components/ListingDetail';
 import SavedListings from './components/SavedListings';
+import Home from './components/Home';
 
 import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
@@ -70,16 +71,20 @@ const AppContent = ({
 
   if (loading) return <div>Loading...</div>;
 
-  // Remove padding under header on /listing/:id only
-  const isListingDetailPage = /^\/listing\/[^/]+$/.test(location.pathname);
+  const isSpecialPage =
+    location.pathname === '/' ||
+    location.pathname === '/error' ||
+    /^\/listing\/[^/]+$/.test(location.pathname);
 
   return (
     <div className="App">
-      {location.pathname !== '/error' && <Header user={user} setUser={setUser} />}
-      <div className={`main-content ${!isListingDetailPage ? 'padding-under-header' : ''}`}>
+      {!isSpecialPage && <Header user={user} setUser={setUser} />}
+
+      <div className={isSpecialPage ? '' : 'main-content padding-under-header'}>
         <Routes>
+          <Route path="/" element={<Home setUser={setUser} />} />
           <Route
-            path="/"
+            path="/marketplace"
             element={
               <>
                 <div className="wrap">
@@ -123,6 +128,7 @@ const AppContent = ({
           <Route path="/error" element={<ErrorPage />} />
           <Route path="*" element={<div>Page Not Found</div>} />
         </Routes>
+
       </div>
     </div>
   );

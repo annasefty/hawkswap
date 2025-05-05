@@ -53,7 +53,7 @@ const Header = ({ user, setUser }) => {
 
   return (
     <header className="header">
-      <Link to="/" className="header-left">
+      <Link to="/marketplace" className="header-left">
         <img src="/images/Logo2.png" alt="Hawk Swap Logo" className="logo-img" />
       </Link>
 
