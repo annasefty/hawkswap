@@ -6,7 +6,6 @@ import "../Header.css";
 
 const Header = ({ user, setUser }) => {
   const navigate = useNavigate();
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -44,69 +43,30 @@ const Header = ({ user, setUser }) => {
 
   const handleProfileClick = () => {
     navigate("/profile");
-    setMenuOpen(false);
-  };
-
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
   };
 
   return (
     <header className="header">
+      {/* Logo on the left */}
       <Link to="/marketplace" className="header-left">
-        <img src="/images/Logo2.png" alt="Hawk Swap Logo" className="logo-img" />
+        <img src="/images/Logo.png" alt="Hawk Swap Logo" className="logo-img" />
       </Link>
 
-      <h1 className="header-title">HAWK SWAP MARKETPLACE</h1>
-
-      <div className="hamburger mobile-only" onClick={toggleMenu}>
-        {menuOpen ? (
-          <span className="close-icon">&times;</span>
-        ) : (
-          <>
-            <span className="bar" />
-            <span className="bar" />
-            <span className="bar" />
-          </>
-        )}
-      </div>
-
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+      {/* Centered Navigation */}
+      <nav className="nav">
         <ul>
-          <li><Link to="/about" onClick={toggleMenu}>About</Link></li>
-          {user && <li><Link to="/listitem" onClick={toggleMenu}>List an Item</Link></li>}
-          {user && <li><Link to="/saved" onClick={toggleMenu}>Saved Listings</Link></li>}
-          {user ? (
-            <li onClick={handleProfileClick}>
-              <img
-                src={user.photoURL}
-                alt={user.displayName}
-                className="google-profile-pic"
-              />
-            </li>
-          ) : (
-            <li>
-              <button className="google-signin-button" onClick={handleGoogleSignIn}>
-                <img src="/images/google-logo.png" alt="Google Logo" className="google-logo" />
-                Sign in with Google
-              </button>
-            </li>
-          )}
+          <li><Link to="/about">About Us</Link></li>
+          {user && <li><Link to="/listitem">List Item</Link></li>}
+          {user && <li><Link to="/saved">Saved Listings</Link></li>}
         </ul>
-      </div>
+      </nav>
 
-      <div className="header-right desktop-only">
-        <nav className="nav">
-          <ul>
-            <li><Link to="/about">About</Link></li>
-            {user && <li><Link to="/listitem">List an Item</Link></li>}
-            {user && <li><Link to="/saved">Saved Listings</Link></li>}
-          </ul>
-        </nav>
+      {/* Right-side profile or login */}
+      <div className="header-right">
         {user ? (
-          <div className="profile-button" onClick={handleProfileClick} title="View Profile">
-            <img src={user.photoURL} alt={user.displayName} className="google-profile-pic" />
-          </div>
+          <button className="profile-button" onClick={handleProfileClick}>
+            <img src={user.photoURL} alt="Profile" className="google-profile-pic" />
+          </button>
         ) : (
           <button className="google-signin-button" onClick={handleGoogleSignIn}>
             <img src="/images/google-logo.png" alt="Google Logo" className="google-logo" />
