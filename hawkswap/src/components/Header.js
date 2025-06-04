@@ -6,6 +6,7 @@ import "../Header.css";
 
 const Header = ({ user, setUser }) => {
   const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -45,14 +46,18 @@ const Header = ({ user, setUser }) => {
     navigate("/profile");
   };
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
     <header className="header">
-      {/* Logo on the left */}
+      {/* Logo */}
       <Link to="/marketplace" className="header-left">
         <img src="/images/Logo.png" alt="Hawk Swap Logo" className="logo-img" />
       </Link>
 
-      {/* Centered Navigation */}
+      {/* Center nav for desktop */}
       <nav className="nav">
         <ul>
           <li><Link to="/about">About Us</Link></li>
@@ -61,7 +66,12 @@ const Header = ({ user, setUser }) => {
         </ul>
       </nav>
 
-      {/* Right-side profile or login */}
+      {/* Hamburger icon for mobile */}
+      <div className="hamburger mobile-only" onClick={toggleMobileMenu}>
+        &#9776;
+      </div>
+
+      {/* Profile or login */}
       <div className="header-right">
         {user ? (
           <button className="profile-button" onClick={handleProfileClick}>
@@ -74,6 +84,15 @@ const Header = ({ user, setUser }) => {
           </button>
         )}
       </div>
+
+      {/* Mobile dropdown menu */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu">
+          <Link to="/about" onClick={toggleMobileMenu}>About Us</Link>
+          {user && <Link to="/listitem" onClick={toggleMobileMenu}>List Item</Link>}
+          {user && <Link to="/saved" onClick={toggleMobileMenu}>Saved Listings</Link>}
+        </div>
+      )}
     </header>
   );
 };

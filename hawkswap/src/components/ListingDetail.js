@@ -54,6 +54,13 @@ const ListingDetail = () => {
   }, [fetchListing]);
 
   useEffect(() => {
+      document.body.style.overflow = "hidden";
+  
+      return () => {
+        document.body.style.overflow = "auto"; // Restore scroll when leaving About page
+      };
+    }, []);
+  useEffect(() => {
     const checkIfSaved = async () => {
       if (!auth.currentUser || !listing) return;
 

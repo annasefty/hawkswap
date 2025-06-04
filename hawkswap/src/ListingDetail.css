@@ -1,15 +1,14 @@
 .listing-detail-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  padding-top: 0;
+  transform: scale(0.9);
+  transform-origin: top center;
 }
 
 .back-button {
   background-color: #4a2500;
   color: white;
   border: none;
-  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
@@ -18,7 +17,8 @@
   align-items: center;
   gap: 8px;
   transition: background-color 0.2s;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
 }
 
 .back-button:hover {
@@ -115,8 +115,8 @@
 }
 
 .seller-info {
-  margin-top: 30px;
-  padding-top: 20px;
+  /* margin-top: 30px;
+  padding-top: 20px; */
   border-top: 1px solid #eee;
   padding: 20px;
   border: 2px solid #ccc;
@@ -191,7 +191,8 @@
 .save-button.saved {
   padding: 10px 16px;
   font-size: 16px;
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Inter', sans-serif;
+  font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.2s ease;
