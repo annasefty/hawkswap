@@ -189,7 +189,7 @@
 .report-button,
 .save-button,
 .save-button.saved {
-  padding: 10px 16px;
+ padding: 10px 16px;
   font-size: 16px;
   font-family: 'Inter', sans-serif;
   font-weight: bold;
@@ -199,6 +199,8 @@
   border: none;
   min-width: 130px;
   text-align: center;
+  white-space: normal;  /* Allow line break */
+  line-height: 1.2;
 }
 
 .report-button {

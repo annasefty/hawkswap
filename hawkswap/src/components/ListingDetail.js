@@ -54,12 +54,12 @@ const ListingDetail = () => {
   }, [fetchListing]);
 
   useEffect(() => {
-      document.body.style.overflow = "hidden";
-  
-      return () => {
-        document.body.style.overflow = "auto"; // Restore scroll when leaving About page
-      };
-    }, []);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "auto"; // Restore scroll when leaving About page
+    };
+  }, []);
   useEffect(() => {
     const checkIfSaved = async () => {
       if (!auth.currentUser || !listing) return;
@@ -146,7 +146,15 @@ const ListingDetail = () => {
             className={`save-button ${isSaved ? 'saved' : ''}`}
             onClick={isSaved ? handleUnsaveListing : handleSaveListing}
           >
-            {isSaved ? 'Unsave' : 'Save'}
+            {isSaved ? (
+              <>
+                Unsave<br />Listing
+              </>
+            ) : (
+              <>
+                Save<br />Listing
+              </>
+            )}
           </button>
           <button
             className="report-button"
@@ -191,8 +199,17 @@ const ListingDetail = () => {
                 className={`save-button ${isSaved ? 'saved' : ''}`}
                 onClick={isSaved ? handleUnsaveListing : handleSaveListing}
               >
-                {isSaved ? 'Unsave Listing' : 'Save Listing'}
+                {isSaved ? (
+                  <>
+                    Unsave<br />Listing
+                  </>
+                ) : (
+                  <>
+                    Save<br />Listing
+                  </>
+                )}
               </button>
+
               <button
                 className="report-button"
                 onClick={() => {
